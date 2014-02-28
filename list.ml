@@ -32,14 +32,17 @@ let tl (list:'a my_list) : 'a my_list =
   | Item (data, next) -> next
 
 
-let nth (l:'a my_list) (nb:int) : 'a = 
+let rec nth (list:'a my_list) (nb:int) : 'a = 
   match nb with
-  | -1 -> failwith "Invalid Argument"
-  | v when nb > length l -> failwith "the list is too short"
+  | i when nb > length list -> failwith "The list is too short"
   | _ ->
-     match l with
+     match list with
      | Empty -> failwith "Empty list"
-     | Item (data, next) -> data
+     | Item (data, next) -> 
+	if nb == 0 
+	then data
+	else nth next (nb - 1)
+       
 
 let l = Item ("salut", Item ("remi double", Item ("salut1", Empty)));;
 
@@ -54,4 +57,9 @@ print_endline "test tl"
 let last = tl l;;
 display_content_list last;;
 
-let elem = nth;;
+let elem = nth l 0;;
+
+print_endline "";;
+print_endline "try get elem at pos";;
+print_endline "";;
+let tmp = nth Empty 2;;
