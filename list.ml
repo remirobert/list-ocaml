@@ -47,6 +47,11 @@ let rec append (list1:'a my_list) (list2:'a my_list) : 'a my_list =
   | Empty -> list2
   | Item (data, next) -> Item (data, append next list2)
 
+let rec rev (list:'a my_list) : 'a my_list = 
+  match list with
+  | Empty -> Empty
+  | Item (data, next) -> append (rev next) (Item (data, Empty))
+
 let l = Item ("salut", Item ("remi double", Item ("salut1", Empty)));;
 let l2 = Item ("toto", Item ("123", Item ("ok ca marche", Empty)));;
 
@@ -54,3 +59,8 @@ let append_list = append l l2;;
 let size = length l;;
 let size1 = length l2;;
 let sizea = length append_list;;
+rev append_list;;
+display_content_list l;;
+let rev_list = rev l;;
+display_content_list rev_list;;
+
