@@ -52,15 +52,20 @@ let rec rev (list:'a my_list) : 'a my_list =
   | Empty -> Empty
   | Item (data, next) -> append (rev next) (Item (data, Empty))
 
-let l = Item ("salut", Item ("remi double", Item ("salut1", Empty)));;
-let l2 = Item ("toto", Item ("123", Item ("ok ca marche", Empty)));;
+let rec rev_append (list1:'a my_list) (list2:'a my_list) : 'a my_list = 
+  let list = rev list1 in
+  match list with
+  | Empty -> list2
+  | Item (data, next) -> Item (data, append next list2)
 
-let append_list = append l l2;;
+let l = Item ("001", Item ("002", Item ("003", Empty)));;
+let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
+
+let append_list = rev_append l l2;;
 let size = length l;;
 let size1 = length l2;;
 let sizea = length append_list;;
-rev append_list;;
-display_content_list l;;
-let rev_list = rev l;;
-display_content_list rev_list;;
+print_endline "try rev append";;
+print_endline;;
+display_content_list append_list;;
 
