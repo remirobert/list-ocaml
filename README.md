@@ -7,7 +7,7 @@ Record list module to learn Caml language
 
 Function
 =======
-
+``` Ocaml
 * length : ’a my_list -> int
 * hd : ’a my_list -> ’a
 * tl : ’a my_list -> ’a my_list
@@ -28,3 +28,4 @@ Function
 * assoc : ’a -> (’a * ’b) my_list -> ’b
 * split : (’a * ’b) my_list -> ’a my_list * ’b my_list
 * remove_assoc : ’a -> (’a * ’b) my_list -> (’a * ’b) my_list
+```
