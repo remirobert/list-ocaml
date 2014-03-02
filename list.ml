@@ -66,6 +66,16 @@ let rec exists (list:'a my_list) (elem:'a) : bool =
      then true
      else exists next elem
 
+let rec iter (f:'a -> 'b) (list:'a my_list) : unit =
+  match list with
+  | Empty -> ()
+  | Item (data, next) -> f data; iter f next
+
+let rec map (f:'a -> 'b) (list:'a my_list) : 'b my_list =
+  match list with
+    | Empty -> Empty
+    | Item (data, next) -> Item (f data, map f next)
+
 let l = Item ("001", Item ("002", Item ("003", Empty)));;
 let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
 
