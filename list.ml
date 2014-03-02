@@ -58,6 +58,14 @@ let rec rev_append (list1:'a my_list) (list2:'a my_list) : 'a my_list =
   | Empty -> list2
   | Item (data, next) -> Item (data, append next list2)
 
+let rec exists (list:'a my_list) (elem:'a) : bool = 
+  match list with
+  | Empty -> false
+  | Item (data, next) ->
+     if data = elem
+     then true
+     else exists next elem
+
 let l = Item ("001", Item ("002", Item ("003", Empty)));;
 let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
 
@@ -69,3 +77,5 @@ print_endline "try rev append";;
 print_endline;;
 display_content_list append_list;;
 
+let ret = exists l "02";;
+ret;;
