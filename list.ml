@@ -105,6 +105,14 @@ let rec assoc (key:'a) (list:('a * 'b) my_list) : 'b =
       then data2
       else assoc key next
 
+let rec mem_assoc (key:'a) (list:('a * 'b) my_list) : bool =
+    match list with
+    | Empty -> false
+    | Item ((data1, data2), next) -> 
+      if compare data1 key = 0
+      then true
+      else mem_assoc key next
+
 let rec for_all (f:('a -> bool)) (list:'a my_list) : bool =
     match list with
     | Empty -> false
