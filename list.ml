@@ -105,6 +105,14 @@ let rec assoc (key:'a) (list:('a * 'b) my_list) : 'b =
       then data2
       else assoc key next
 
+let rec for_all (f:('a -> bool)) (list:'a my_list) : bool =
+    match list with
+    | Empty -> false
+    | Item (data, next) ->
+      if f data = false
+      then false
+      else for_all f list
+
 let l = Item ("001", Item ("002", Item ("003", Empty)));;
 let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
 
