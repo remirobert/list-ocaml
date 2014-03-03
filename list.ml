@@ -81,15 +81,23 @@ let rec mem (elem:'a) (list:'a my_list) : bool =
     then true
     else mem elem list
 
+let rec memq (elem:'a) (list:'a my_list) : bool =
+  match list with 
+  | Empty -> false
+  | Item (data, next) -> 
+    if data = elem
+    then true
+    else mem elem list
+
 let rec filter (f:'a -> bool) (list:'a my_list) : 'a my_list =
   match list with
   | Empty -> Empty
   | Item (data, next) -> 
     if f data = true
     then Item (data, filter f next)
-  else filter f next
+    else filter f next
 
-let rec assoc (key:'a) (list: ('a * 'b) my_list) : 'b =  
+let rec assoc (key:'a) (list:('a * 'b) my_list) : 'b =
     match list with
     | Empty -> Empty
     | Item ((data1, data2), next) -> 
