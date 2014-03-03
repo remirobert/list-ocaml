@@ -27,7 +27,7 @@ let rec get_last_elem (list:'a my_list) : 'a =
 
 let tl (list:'a my_list) : 'a my_list = 
   match list with
-  | Empty -> failwith "Empty list" 
+  | Empty -> Empty 
   | Item (data, Empty) -> Empty
   | Item (data, next) -> next
 
@@ -81,13 +81,25 @@ let rec mem (elem:'a) (list:'a my_list) : bool =
     then true
     else mem elem list
 
+let rec filter (f:'a -> bool) (list:'a my_list) : 'a my_list =
+  match list with
+  | Empty -> Empty
+  | Item (data, next) -> 
+    if f data = true
+    then Item (data, filter f next)
+  else filter f next
+
+let rec assoc (key:'a) (list: ('a * 'b) my_list) : 'b =  
+    match list with
+    | Empty -> Empty
+    | Item ((data1, data2), next) -> 
+      if data1 = key
+      then data2
+      else assoc key next
+
 let l = Item ("001", Item ("002", Item ("003", Empty)));;
 let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
 
-let append_list = rev_append l l2;;
-let size = length l;;
-let size1 = length l2;;
-let sizea = length append_list;;
 print_endline "try rev append";;
-print_endline;;
-display_content_list append_list;;
+
+iter print_string l;;
