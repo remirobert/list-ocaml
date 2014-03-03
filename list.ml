@@ -77,7 +77,7 @@ let rec mem (elem:'a) (list:'a my_list) : bool =
   match list with 
   | Empty -> false
   | Item (data, next) -> 
-    if data = elem
+    if compare data elem = 0
     then true
     else mem elem list
 
@@ -93,7 +93,7 @@ let rec assoc (key:'a) (list: ('a * 'b) my_list) : 'b =
     match list with
     | Empty -> Empty
     | Item ((data1, data2), next) -> 
-      if data1 = key
+      if compare data1 key = 0
       then data2
       else assoc key next
 
