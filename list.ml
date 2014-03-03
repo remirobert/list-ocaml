@@ -129,6 +129,11 @@ let rec for_all (f:('a -> bool)) (list:'a my_list) : bool =
       then false
       else for_all f list
 
+let rec fold_left f (elem:'a) (list:'b my_list) : 'a =
+  match list with
+  | Empty -> Empty
+  | Item (data, next) -> fold_left f (f elem data) next
+
 let l = Item ("001", Item ("002", Item ("003", Empty)));;
 let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
 
