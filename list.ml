@@ -134,6 +134,12 @@ let rec fold_left = (fun f (elem:'a) (list:'b my_list) ->
   | Empty -> Empty
   | Item (data, next) -> fold_left f (f elem data) next)
 
+let rec split = (fun (l:('a * 'b) my_list) ->
+  match l with
+  | Empty -> (Empty, Empty)
+  | Item ((data1, data2), next) ->
+    let (d1, d2) = split next in (d1, d2))
+
 let l = Item ("001", Item ("002", Item ("003", Empty)));;
 let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
 
