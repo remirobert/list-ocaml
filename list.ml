@@ -140,15 +140,6 @@ let rec split = (fun (l:('a * 'b) my_list) ->
   | Item ((data1, data2), next) ->
     let (d1, d2) = split next in (d1, d2))
 
-let tryfunc = (fun (l:'a my_list) ->
-  match l with
-  | Empty -> 0
-  | Item (data, next) ->
-    let x in
-      for i = 0 to length l do        
-      done
-)
-
 let l = Item ("001", Item ("002", Item ("003", Empty)));;
 let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
 
