@@ -2,10 +2,10 @@ type 'a my_list =
   | Item of ('a * 'a my_list)
   | Empty
 
-let rec length = (fun (list:'a my_list) ->
+let rec length (list:'a my_list) =  
   match list with
   | Empty -> 0
-  | Item (data, next) -> length next + 1)
+  | Item (data, next) -> length next + 1
 
 let rec display_content_list = (fun (list:'a my_list) ->
   match list with
@@ -14,29 +14,22 @@ let rec display_content_list = (fun (list:'a my_list) ->
 			 print_endline "";
 			 display_content_list next + 1)
 
-let get_first_elem = (fun (list:'a my_list) ->
+let hd = (fun (list:'a my_list) ->
   match list with
-  | Empty -> failwith "Empty list"
+  | Empty -> Empty
   | Item (data, next) -> data)
 
-let rec get_last_elem = (fun (list:'a my_list) ->
+let tl = (fun (list:'a my_list) ->
   match list with
-  | Empty -> failwith "Empty list"
-  | Item (data, Empty) -> data
-  | Item (data, next) -> get_last_elem next)
-
-let tl  = (fun (list:'a my_list) ->
-  match list with
-  | Empty -> Empty 
-  | Item (data, Empty) -> Empty
+  | Empty -> Empty
   | Item (data, next) -> next)
 
-let rec nth  = (fun (list:'a my_list) (nb:int) ->
+let rec nth = (fun (list:'a my_list) (nb:int) ->
   match nb with
-  | i when nb > length list -> failwith "The list is too short"
+  | i when nb > length list -> invalid_arg "The list is too short"
   | _ ->
      match list with
-     | Empty -> failwith "Empty list"
+     | Empty -> invalid_arg "The list is Empty"
      | Item (data, next) -> 
 	if nb == 0 
 	then data
@@ -139,14 +132,3 @@ let rec split = (fun (l:('a * 'b) my_list) ->
   | Empty -> (Empty, Empty)
   | Item ((data1, data2), next) ->
     let (d1, d2) = split next in (d1, d2))
-
-let l = Item ("001", Item ("002", Item ("003", Empty)));;
-let l2 = Item ("110", Item ("112", Item ("113", Empty)));;
-
-let m = Item (("001", "002"), Item (("101", "102"), Empty));;
-
-print_endline "try rev append";;
-
-display_content_list l;;
-
-(*iter print_string l;;*)
