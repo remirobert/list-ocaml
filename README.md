@@ -5,6 +5,14 @@ What is this
 ============
 Record list module to learn Caml language
 
+Type
+====
+```Ocaml
+type 'a my_list =
+  | Item of ('a * 'a my_list)
+  | Empty
+```
+
 Function
 =======
 ``` Ocaml
